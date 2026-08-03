@@ -12,7 +12,7 @@ class invertedindex:
         invind = defaultdict(set)
 
         for docid,doc in enumerate(self.df["document"]):
-            words = doc.split()
+            words = clean_text(doc).split()
 
             for w in words:
                 invind[w].add(docid) 
