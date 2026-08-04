@@ -4,6 +4,7 @@ import re
 from sklearn.feature_extraction.text import ENGLISH_STOP_WORDS
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+CSV_PATH = BASE_DIR / "data" / "amazon.csv"
 
 TEXT_COLUMNS = [
     "product_name",
@@ -34,7 +35,7 @@ def clean_text(text):
 
 def preprocess():
    
-   CSV_PATH = BASE_DIR / "amazon.csv"
+   CSV_PATH = BASE_DIR / "data" /"amazon.csv"
    df = pd.read_csv(CSV_PATH)
    
    df = df.fillna("")

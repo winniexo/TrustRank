@@ -110,8 +110,8 @@ def train_classifier():
             "Verify that the labels are not too deterministic.\n"
         )
 
-    save_pickle(model, BASE_DIR / "model.pkl")
-    save_pickle(vectorizer, BASE_DIR / "vectorizer.pkl")
+    save_pickle(model, BASE_DIR/ "models" / "model.pkl")
+    save_pickle(vectorizer, BASE_DIR / "models"/ "vectorizer.pkl")
 
     print("\nModel saved successfully.")
 
@@ -129,8 +129,8 @@ def _get_model_and_vectorizer():
     """
     global _MODEL, _VECTORIZER
     if _MODEL is None or _VECTORIZER is None:
-        _MODEL = load_pickle(BASE_DIR / "model.pkl")
-        _VECTORIZER = load_pickle(BASE_DIR / "vectorizer.pkl")
+        _MODEL = load_pickle(BASE_DIR/"models" / "model.pkl")
+        _VECTORIZER = load_pickle(BASE_DIR / "models"/"vectorizer.pkl")
     return _MODEL, _VECTORIZER
 
 
