@@ -117,6 +117,7 @@ def compute_batch_trust_scores(reviews_df, proba_genuine_col="proba_genuine",
             review_row=row,
             weights=weights,
         )
+        result["record_id"] = row.get("record_id")
         result["review_id"] = row.get("review_id")
         records.append(result)
 
@@ -132,10 +133,11 @@ def rerank_reviews(ranked_reviews_df, trust_scores_df,
                     trust_weight=RERANK_TRUST_WEIGHT):
     """Blend relevance and trust scores into a new review order."""
     merged = ranked_reviews_df.merge(
-        trust_scores_df[["review_id", "trust_score", "classifier_confidence",
-                          "behavioral_signal",  "label"]],
-        on="review_id",
+        trust_scores_df[["record_id", "review_id", "trust_score", "classifier_confidence",
+                          "behavioral_signal", "label"]],
+        on="record_id",
         how="left",
+        validate="one_to_one",
     )
 
     # Normalize relevance to [0, 1] in case cosine scores aren't already

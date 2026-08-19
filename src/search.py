@@ -31,8 +31,10 @@ def search(query):
 
     merged = results.merge(
         feature_df,
-        on=["review_id", "product_id"],
-        how="left"
+        on=["record_id"],
+        how="left",
+        validate="one_to_one",
+        suffixes=("", "_feature"),
     )
 
     merged["proba_genuine"] = merged.apply(

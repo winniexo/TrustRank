@@ -148,8 +148,13 @@ def build_review_features(df):
 
     review_features = pd.DataFrame(review_features.tolist())
 
-    review_features.insert(0, "product_id", data["product_id"])
-    review_features.insert(1, "review_id", data["review_id"])
+    if "record_id" in data.columns:
+        review_features.insert(0, "record_id", data["record_id"])
+        review_features.insert(1, "product_id", data["product_id"])
+        review_features.insert(2, "review_id", data["review_id"])
+    else:
+        review_features.insert(0, "product_id", data["product_id"])
+        review_features.insert(1, "review_id", data["review_id"])
 
     return review_features
 
